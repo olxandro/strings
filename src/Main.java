@@ -1,4 +1,6 @@
 import javax.naming.spi.StateFactory;
+import java.util.Arrays;
+import java.util.Locale;
 
 public class Main {
     public static void main(String[] args) {
@@ -15,10 +17,10 @@ public class Main {
         В качестве данных для задачи используйте “Ivanov Ivan Ivanovich”.
          */
         String firstName = "Ivan";
-                String middleName = "Ivanovich";
-                        String lastName = "Ivanov";
+        String middleName = "Ivanovich";
+        String lastName = "Ivanov";
         String fullName = lastName + " " + firstName + " " + middleName;
-        System.out.println("ФИО сотрудника — " + fullName );
+        System.out.println("ФИО сотрудника — " + fullName);
 
         //task2
         /*
@@ -44,5 +46,104 @@ public class Main {
         fullName = "Иванов Семён Семёнович";
         str = fullName.replace("ё", "е");
         System.out.println(str);
+
+//        task4*
+        /*
+        К нам снова обратились за помощью, но теперь уже для того, чтобы написать алгоритм, разбивающий одну строку с
+        Ф. И. О. на три — на фамилию, имя и отчество.В качестве исходных данных используйте:Ф. И. О. сотрудника:
+        “Ivanov Ivan Ivanovich”; строка fullName — для хранения Ф. И. О. сотрудника в формате фамилия - имя -
+        отчество;переменная firstName — для хранения имени;переменная middleName — для хранения отчества;переменная
+        lastName — для хранения фамилии. Решите задание с помощью метода substring().Результат программы выведите в формате:
+        “Имя сотрудника — …”
+        “Фамилия сотрудника — …”
+        “Отчество сотрудника — ...”
+        Важно: «в голове» высчитывать позиции пробелов и параметров для обрезания строки запрещено. Их должен вычислить
+        компьютер.
+        Подсказка - Определить индексы символов помогут методы indexOf() и lastIndexOf().
+        Критерии оценки
+        – При изменении содержания строки результат программы выполняется.
+        – Программа решена с помощью метода substring().
+        – Результат программы выведен в консоль согласно условиям задачи.
+
+         */
+
+        fullName = " ivanov ivan ivanovich";
+        String[] fullName1 = fullName.trim().split(" ");
+        System.out.println(Arrays.toString(fullName1));
+        firstName = fullName1[1];
+        lastName = fullName1[0];
+        middleName = fullName1[2];
+        System.out.println("Имя сотрудника - " + firstName);
+        System.out.println("Фамилия сотрудника - " + lastName);
+        System.out.println("Отчество сотрудника - " + middleName);
+
+//        task5*
+        /*
+        Периодически данные в наших регистрах заполняются неверно, и Ф. И. О. сотрудников записывают со строчных букв.
+        Такую оплошность нужно исправить, написав программу, которая преобразует написанное со строчных букв Ф. И. О. в
+        правильный формат. В качестве исходных данных используйте строку fullName c данными “ivanov ivan ivanovich“,
+        которые нужно преобразовать в “Ivanov Ivan Ivanovich”. Выведите результат программы в консоль в формате:
+        “Верное написание Ф. И. О. сотрудника с заглавных букв — …”
+        Подсказка 1
+        Метод toCharArray() может быть полезен.
+        Подсказка 2
+        Для преобразования символа в верхний регистр следует использовать метод Character.toUpperCase(c), где c — символ.
+         */
+
+        char[] f = firstName.toCharArray();
+        f[0] = Character.toUpperCase(f[0]);
+        firstName = new String(f);
+        char[] l = lastName.toCharArray();
+        l[0] = Character.toUpperCase(l[0]);
+        lastName = new String(l);
+        char[] m = middleName.toCharArray();
+        m[0] = Character.toUpperCase(m[0]);
+        middleName = new String(m);
+        fullName = firstName + " " + lastName + " " + middleName;
+        System.out.println("Верное написание Ф. И. О. сотрудника с заглавных букв — " + fullName);
+
+        //task6*
+        /*
+        Имеется две строки.
+        Первая: "135"
+        Вторая: "246"
+        Соберите из двух строк одну, содержащую данные "123456".
+        Использовать сортировку нельзя.
+        Набор чисел задан для понимания позиций, которые они должны занять в итоговой строке.
+        Выведите результат в консоль в формате: “Данные строки — ….”
+        Подсказка
+        Следует использовать StringBuilder.
+         */
+
+        String s1 = "135";
+        String s2 = "246";
+        StringBuilder sb = new StringBuilder(s1);
+        sb.append(s2);
+        sb.insert(1, 2);
+        sb.insert(3, 4);
+        sb.delete(5, 7);
+//        sb.replace(0,7, "123456");
+        System.out.println("Данные строки — " + sb + ".");
+
+
+        //task7*
+        /*
+        Дана строка из букв английского алфавита "aabccddefgghiijjkk".
+        Нужно найти и напечатать буквы, которые дублируются в строке.
+        Обратите внимание, что строка отсортирована, т. е. дубли идут друг за другом.
+        В итоге в консоль должен быть выведен результат программы: "acdgijk".
+         */
+
+        String eng = "aabccddefgghiijjkk";
+        StringBuilder a = new StringBuilder();
+        int index;
+        for (int i = 0; i < eng.length(); i++) {
+            char c = eng.charAt(i);
+            index = eng.indexOf(c, i + 1);
+            if (index >= 0) {
+                a.append(c);
+            }
+        }
+        System.out.println(a);
     }
 }
